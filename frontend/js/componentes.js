@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <li><a href="reservas.html">Mis Reservas</a></li>
             <li><a href="nuevaReserva.html">Nueva Reserva</a></li>
             <li class="usuario-logeado">
-                <a href="perfil.html">
+                <a href="aCliente.html">
                     <span class="icono-user">👤</span> Hola, Juan Pérez
                 </a>
             </li>
