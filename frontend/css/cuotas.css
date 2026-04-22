@@ -1,0 +1,39 @@
+
+
+h1{
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.cuotas{
+    display: flex;
+    text-align: center;
+    color: white;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-left: 5%;
+    margin-bottom: 3%;
+}
+
+#caja-cuota{
+    border: solid 3px #5D9CEC;
+    background-color: #191e29;
+    border-radius: 20px;
+    padding: 20px;
+    width: 240px;
+}
+
+#caja-cuota h3{
+    margin-top: 0;
+    color: #5D9CEC;
+    text-transform: uppercase;
+}
+
+ 
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}

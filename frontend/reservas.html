@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/global.css">
+    <title>CodeCenter</title>
+</head>
+
+<<body class="body-cliente">
+
+    <<header data-nav="clientes"></header>
+
+    <div class="contenedor-principal">
+        <h1 class="titulo-reserva">Calendario de disponibilidad</h1>
+        <p class="subtitulo-reserva">Selecciona un día para ver los horarios en <span id="nombre-deporte" style="color: #5D9CEC; font-weight: bold;">...</span></p>
+        
+        <div class="calendario-wrapper">
+            <div id="calendario-inline"></div>
+            
+            <div class="calendario-leyenda">
+                <div class="leyenda-item"><span class="punto hoy"></span> Hoy</div>
+                <div class="leyenda-item"><span class="punto seleccionado"></span> Seleccionado</div>
+                <div class="leyenda-item"><span class="punto ocupado"></span> No disponible</div>
+            </div>
+        </div>
+
+        <div id="selector-horas" style="display:none; margin-top: 20px;">
+            <h3>Horas disponibles para el <span id="fecha-elegida"></span></h3>
+            <div class="grid-horas">
+                </div>
+        </div>
+
+        <button class="btn-volver" onclick="location.href='nuevaReserva.html'">
+            <span>←</span> Volver a actividades
+        </button>
+    </div>
+
+    <footer></footer>
+
+  <script src="js/componentes.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+    <script src="js/reservas.js"></script>
+
+    
+</body>
+
+</html>

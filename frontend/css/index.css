@@ -1,0 +1,359 @@
+@keyframes carrusel-automatico {
+  0%, 25%  { transform: translateX(0); }
+  33%, 58% { transform: translateX(-33.333%); }
+  66%, 91% { transform: translateX(-66.666%); }
+  100%     { transform: translateX(0); }
+}
+
+/* --- RESET --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================
+   BANNER
+======================== */
+.banner-promo {
+  display: flex;
+  align-items: stretch;
+  background: #0d2035;
+  height: 650px;
+}
+
+.banner-left {
+  flex: 1.2;
+  position: relative;
+  overflow: hidden;
+  height: 650px;
+  overflow: hidden;
+}
+
+.carrusel {
+  width: 100%;
+  height: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carrusel-fotos {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  animation: carrusel-automatico 12s infinite ease-in-out;
+}
+
+.carrusel-fotos img {
+  width: 33.333%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.carrusel-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+}
+
+.dot.active {
+  background: #01c38d;
+}
+
+.banner-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 44px;
+  background: linear-gradient(135deg, #132d46 0%, #0d2035 100%);
+  border-left: 3px solid #01c38d;
+}
+
+.banner-tag {
+  display: inline-block;
+  background: rgba(1, 195, 141, 0.15);
+  color: #01c38d;
+  border: 1px solid #01c38d;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  margin-bottom: 24px;
+  width: fit-content;
+}
+
+.banner-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1.05;
+  color: white;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.banner-title em {
+  color: #01c38d;
+  font-style: normal;
+}
+
+.banner-desc {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 340px;
+}
+
+.btn-inscribete {
+  display: inline-block;
+  background: #e84c2b;
+  color: white;
+  text-decoration: none;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  width: fit-content;
+}
+
+.btn-inscribete:hover {
+  background: #c73d20;
+  transform: translateY(-2px);
+}
+
+/* ========================
+   CAMPAMENTOS
+======================== */
+.campamentos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 60px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-top: 3px solid #e84c2b;
+  border-bottom: 3px solid #e84c2b;
+  gap: 40px;
+}
+
+.camp-label {
+  display: block;
+  color: #e84c2b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.camp-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.camp-desc {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.9rem;
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.btn-informate {
+  display: inline-block;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 14px 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-informate:hover {
+  background: white;
+  color: #1a1a2e;
+}
+
+/* ========================
+   HORARIO
+======================== */
+.horario-section {
+  background: #132d46;
+  padding: 60px 40px;
+}
+
+.horario-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.horario-header h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.horario-header p {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+.horario-tabla-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.horario-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  min-width: 700px;
+}
+
+.horario-tabla th {
+  background: #0d2035;
+  color: #01c38d;
+  padding: 14px 10px;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #01c38d;
+}
+
+.horario-tabla td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: opacity 0.15s;
+}
+
+.horario-tabla tr:hover td {
+  opacity: 0.85;
+}
+
+.horario-tabla td.hora {
+  background: #0d2035;
+  color: #5D9CEC;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.horario-tabla td.descanso {
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.3);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.horario-tabla td.natacion    { background: rgba(1,195,141,0.12);  color: #01c38d; }
+.horario-tabla td.musculacion { background: rgba(93,156,236,0.12); color: #5D9CEC; }
+
+/* ========================
+   RESPONSIVE
+======================== */
+@media (max-width: 900px) {
+  .banner-promo {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .banner-left {
+    min-height: 220px;
+  }
+
+  .banner-right {
+    border-left: none;
+    text-align: center;
+    align-items: center;
+    border-top: 3px solid #01c38d;
+    padding: 40px 30px;
+  }
+
+  .banner-title {
+    font-size: 2.8rem;
+  }
+
+  .campamentos {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 36px 30px;
+    gap: 24px;
+  }
+
+  .camp-desc {
+    margin: 0 auto;
+  }
+
+  .camp-title {
+    font-size: 2.2rem;
+  }
+
+  .horario-section {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner-right {
+    padding: 30px 20px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .banner-title {
+    font-size: 2.2rem;
+  }
+
+  .banner-tag {
+    font-size: 0.7rem;
+  }
+}
