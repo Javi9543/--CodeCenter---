@@ -38,7 +38,7 @@ docker-compose.yml: El mando a distancia para encenderlo todo.
 5. la red app-network: es una red privada virtual.
 
 
-![](./3.png)
+![](./img/3.png)
 
 he conectado la carpeta local con github
 
