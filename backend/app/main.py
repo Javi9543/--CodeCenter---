@@ -14,7 +14,7 @@ import hashlib
  
 from app.database import engine, get_db, Base
 from app import models
- 
+from app import horarios_disponibles 
 # --- INICIALIZACIÓN ---
 # Esto crea las tablas en la BD si no existen todavía
 Base.metadata.create_all(bind=engine)
@@ -236,4 +236,10 @@ def listar_usuarios(db: Session = Depends(get_db)):
         }
         for u in usuarios
     ]
+
+@app.get("/disponibilidad")
+def obtener_disponibilidad(deporte: str, fecha: str, db: Session = Depends(get_db)):
+    lista_horas = horarios_disponibles.horasLibres(db, deporte, fecha)
+    
+    return {"horas": lista_horas}
  
