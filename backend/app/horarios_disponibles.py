@@ -4,8 +4,8 @@ from app import models
 
 # Horarios Deportes
 HorariosCentro = {
-    "fútbol" : ["17:00", "18:00", "19:00", "20:00", "21:00"],
-    "pádel" : ["8:00", "9:00", "10:00", "11:00", "12:00"],
+    "fútbol" : ["17:00 - 18:00", "19:00 - 20:00", "20:00 - 21:00"],
+    "pádel" : ["8:00 -9:00", "10:00 - 11:00", "12:00 - 13:00"]
 }
 
 # Con esto se mostrarán las horas libres y ocultará las horas que no estan disponibles
