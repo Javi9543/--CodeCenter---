@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             console.log("Buscando disponibilidad para " + dateStr);
 
-            fetch(`http://localhost/disponibilidad?deporte=${deporteSeleccionado}&fecha=${dateStr}`)
+            fetch(`http://localhost:8000/disponibilidad?deporte=${deporteSeleccionado}&fecha=${dateStr}`)
                 .then(response => response.json())
                 .then(data => {
                     contendorLista.innerHTML = "";
