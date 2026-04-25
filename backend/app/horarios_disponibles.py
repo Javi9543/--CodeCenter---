@@ -1,3 +1,4 @@
+from pyexpat import model
 from sqlalchemy import true
 from sqlalchemy.orm import Session
 from app import models
@@ -40,8 +41,21 @@ def horasLibres(db, deporte: str, fecha:str):
     horasDisp = [hora for hora in horario_aux if hora not in horas_reserv]
     return horasDisp
 
-def registraReserva(db: Session, deporte: str, fecha: str, hora: str, usuario: str):
-    print(f"Actividad: {deporte}")
-    print(f"Usuario: {usuario}")
-    print(f"Fecha y Hora: {fecha} | {hora}")
-    return True
+def registraReserva(db: Session, deporte: str, fecha: str, hora: str, usuario_id: int):
+    try:
+        nuevaReserva = models.Reserva(
+            deporte = deporte,
+            fecha = fecha,
+            hora = hora,
+            usuario_id = usuario_id
+        ) 
+        db.add(nuevaReserva)
+        db.commit()
+        db.refresh(nuevaReserva)
+        print("Reserva Guardada")
+        return True
+
+    except Exception as e: 
+        db.rollback()
+        print("Error al insertar la reserva")
+        return False

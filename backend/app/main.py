@@ -248,16 +248,16 @@ class ReservaSchema(BaseModel):
     deporte: str
     fecha: str
     hora: str
-    usuario_nombre: str
+    usuario_id: int
 
-@app.post("/Reservar")
+@app.post("/reservar")
 def enviar_reserva(reserva: ReservaSchema, db: Session = Depends(get_db)):
     exito = registraReserva(
         db=db, 
         deporte=reserva.deporte, 
         fecha=reserva.fecha, 
         hora=reserva.hora, 
-        usuario=reserva.usuario_nombre
+        usuario_id=reserva.usuario_id
     )
     
     return {"status": "ok", "mensaje": "Reserva enviada a la lógica"}

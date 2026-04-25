@@ -42,7 +42,9 @@ class Usuario(Base):
 
 class Reserva(Base):
     __tablename__ = "reservas"
+
     id = Column(Integer, primary_key=True, index=True)
     deporte = Column(String, nullable=False)
     fecha = Column(String, nullable=False)
     hora = Column(String, nullable=False)
+    usuario_id = Column(Integer, nullable=False)
