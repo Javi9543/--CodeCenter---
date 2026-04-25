@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Capturamos la URL actual
     const urlParams = new URLSearchParams(window.location.search);
-    
+
     // 2. Sacamos el valor de "deporte"
     const deporteSeleccionado = urlParams.get('deporte');
 
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ponemos la primera letra en mayúscula para que quede bonito
         const textoFinal = deporteSeleccionado.charAt(0).toUpperCase() + deporteSeleccionado.slice(1);
         cajaTitulo.innerText = textoFinal;
-        
+
         console.log("Calendario cargado para: " + textoFinal);
     }
 
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         locale: "es",            // En español
         minDate: "today",        // No permite el pasado
         dateFormat: "d-m-Y",     // Formato día-mes-año
-        
-        onChange: function(selectedDates, dateStr) {
+
+        onChange: function (selectedDates, dateStr) {
             // 1. Mostramos el div de horas
             document.getElementById('selector-horas').style.display = 'block';
             // 2. Escribimos la fecha seleccionada
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const contendorLista = document.querySelector('.grid-horas');
             contendorLista.innerHTML = "Buscando horarios...";
-            
+
             console.log("Buscando disponibilidad para " + dateStr);
 
             fetch(`http://localhost:8000/disponibilidad?deporte=${deporteSeleccionado}&fecha=${dateStr}`)
@@ -39,22 +39,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     contendorLista.innerHTML = "";
 
-                    if(data.horas && data.horas.length > 0) {
+                    if (data.horas && data.horas.length > 0) {
                         data.horas.forEach(hora => {
+
+                            // elementos, de texto 
+                            const fila = document.createElement('div');
+                            fila.style.display = "flex";
+                            fila.style.justifyContent = "center";
+                            fila.style.alignItems = "center";
+                            fila.style.gap = "15px";
+                            fila.style.marginBottom = "8px";
+
                             const infoHora = document.createElement('p');
                             infoHora.innerText = "· " + hora;
-                            infoHora.style.margin = "5px 0";
+                            infoHora.style.margin = "0";
                             infoHora.style.fontWeight = "500";
-                            contendorLista.appendChild(infoHora);
+
+                            // boton de reserva para las horas disponibles
+                            const botonReservar = document.createElement('button');
+                            botonReservar.innerText = "Reservar";
+                            botonReservar.className = "btn-azul";
+                            botonReservar.style.backgroundColor = "#5D9CEC";
+                            botonReservar.style.color = "white";
+                            botonReservar.style.border = "none";
+                            botonReservar.style.padding = "5px";
+                            botonReservar.style.borderRadius = "8px";
+                            botonReservar.style.cursor = "pointer";
+
+                            botonReservar.onclick = () => { realizarReserva(deporteSeleccionado, dateStr, hora) };
+                            fila.appendChild(infoHora);
+                            fila.appendChild(botonReservar);
+                            contendorLista.appendChild(fila);
+
                         });
                     } else {
                         contendorLista.innerHTML = "<p>No hay horarios disponibles</p>";
                     }
-                });
-                
-        } 
 
-        
+                    // funcion para enviar reservas
+                    function realizarReserva(deporte, fecha, hora) {
+                        if (confirm(`¿Quiere reservar ${deporte} para la fecha ${fecha} en el rango de: ${hora}?`)) {
+                            fetch('http://localhost:8000/reservar', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    deporte: deporte,
+                                    fecha: fecha,
+                                    hora: hora,
+                                    usuario_nombre: "string" 
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(data => alert("Reserva Confirmada..."))
+                            .catch(err => alert("Error al conectar con el servidor"));
+                        }
+                    }
+            }   );
+        }
+
+
     });
 
 });
