@@ -14,7 +14,6 @@ import hashlib
  
 from app.database import engine, get_db, Base
 from app import models
-<<<<<<< HEAD
 from app.horarios_disponibles import horasLibres
 from app.horarios_disponibles import registraReserva
 # --- INICIALIZACIÓN ---
@@ -34,12 +33,10 @@ def asegurar_columna_usuario_id():
             conn.execute(text("ALTER TABLE reservas ADD COLUMN usuario_id INTEGER NOT NULL DEFAULT 0"))
 
 asegurar_columna_usuario_id()
-=======
  
 # --- INICIALIZACIÓN ---
 # Esto crea las tablas en la BD si no existen todavía
 Base.metadata.create_all(bind=engine)
->>>>>>> origin/develop
  
 # --- INICIALIZACIÓN ---
 # Esto crea las tablas en la BD si no existen todavía
@@ -71,10 +68,7 @@ def hashear_password(password: str) -> str:
 # ============================================================
 def crear_usuarios_iniciales(db: Session):
     """
-<<<<<<< HEAD
     Si la tabla está vacía, inserta 4 usuarios de prueba.
-=======
->>>>>>> origin/develop
     Se llama automáticamente al arrancar la app.
     """
     if db.query(models.Usuario).count() == 0:
@@ -265,7 +259,6 @@ def listar_usuarios(db: Session = Depends(get_db)):
         }
         for u in usuarios
     ]
-<<<<<<< HEAD
 
 @app.get("/disponibilidad")
 def obtener_disponibilidad(deporte: str, fecha: str, db: Session = Depends(get_db)):
@@ -292,6 +285,3 @@ def enviar_reserva(reserva: ReservaSchema, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail="No se pudo guardar la reserva")
 
     return {"status": "ok", "reserva_id": reserva_id, "mensaje": "Reserva guardada"}
-=======
- 
->>>>>>> origin/develop
