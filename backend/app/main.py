@@ -20,19 +20,19 @@ from app.horarios_disponibles import registraReserva
 # --- INICIALIZACIÓN ---
 # Esto crea las tablas en la BD si no existen todavía
 Base.metadata.create_all(bind=engine)
- 
+
 # Compatibilidad: asegurar columna usuario_id para reservas.
 def asegurar_columna_usuario_id():
     inspector = inspect(engine)
     tablas = inspector.get_table_names()
     if "reservas" not in tablas:
         return
- 
+
     columnas = {col["name"] for col in inspector.get_columns("reservas")}
     if "usuario_id" not in columnas:
         with engine.begin() as conn:
             conn.execute(text("ALTER TABLE reservas ADD COLUMN usuario_id INTEGER NOT NULL DEFAULT 0"))
- 
+
 asegurar_columna_usuario_id()
  
 # --- INICIALIZACIÓN ---
@@ -260,7 +260,7 @@ def listar_usuarios(db: Session = Depends(get_db)):
 @app.get("/disponibilidad")
 def obtener_disponibilidad(deporte: str, fecha: str, db: Session = Depends(get_db)):
     lista_horas = horasLibres(db, deporte, fecha)
-   
+    
     return {"horas": lista_horas}
  
 class ReservaSchema(BaseModel):
@@ -268,52 +268,18 @@ class ReservaSchema(BaseModel):
     fecha: str
     hora: str
     usuario_id: int
- 
+
 @app.post("/reservar")
 def enviar_reserva(reserva: ReservaSchema, db: Session = Depends(get_db)):
     reserva_id = registraReserva(
-        db=db,
-        deporte=reserva.deporte,
-        fecha=reserva.fecha,
+        db=db, 
+        deporte=reserva.deporte, 
+        fecha=reserva.fecha, 
         hora=reserva.hora,
         usuario_id=reserva.usuario_id
     )
     if reserva_id is None:
         raise HTTPException(status_code=500, detail="No se pudo guardar la reserva")
- 
+
     return {"status": "ok", "reserva_id": reserva_id, "mensaje": "Reserva guardada"}
-
-
-# ============================================================
-#   ENDPOINT: GET /reservas/{usuario_id}
-#   Devuelve las reservas de un usuario — usado por misReservas.html
-# ============================================================
-@app.get("/reservas/{usuario_id}")
-def get_reservas(usuario_id: int, db: Session = Depends(get_db)):
-    reservas = db.query(models.Reserva).filter(
-        models.Reserva.usuario_id == usuario_id
-    ).order_by(models.Reserva.fecha).all()
-    return [
-        {
-            "id": r.id,
-            "usuario_id": r.usuario_id,
-            "deporte": r.deporte,
-            "fecha": r.fecha,
-            "hora": r.hora
-        }
-        for r in reservas
-    ]
-
-
-# ============================================================
-#   ENDPOINT: PUT /reservas/{id}/cancelar
-#   Elimina una reserva — usado por misReservas.html
-# ============================================================
-@app.put("/reservas/{id}/cancelar")
-def cancelar_reserva(id: int, db: Session = Depends(get_db)):
-    reserva = db.query(models.Reserva).filter(models.Reserva.id == id).first()
-    if not reserva:
-        raise HTTPException(status_code=404, detail="Reserva no encontrada")
-    db.delete(reserva)
-    db.commit()
-    return {"ok": True}
+ 
