@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // funcion para enviar reservas
                     function realizarReserva(deporte, fecha, hora) {
+                        const usuario = JSON.parse(sessionStorage.getItem('usuario'));
                         if (confirm(`¿Quiere reservar ${deporte} para la fecha ${fecha} en el rango de: ${hora}?`)) {
                             fetch('http://localhost:8000/reservar', {
                                 method: 'POST',
@@ -86,11 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                     deporte: deporte,
                                     fecha: fecha,
                                     hora: hora,
-                                    usuario_nombre: "string" 
+                                    usuario_id: usuario.id
                                 })
                             })
                             .then(res => res.json())
-                            .then(data => alert("Reserva Confirmada..."))
+                            .then(data => {alert("Reserva Confirmada, gracias por reservar")})
                             .catch(err => alert("Error al conectar con el servidor"));
                         }
                     }

@@ -51,9 +51,9 @@ def registraReserva(db: Session, deporte: str, fecha: str, hora: str, usuario_id
         db.commit()
         db.refresh(nuevaReserva)
         print("Reserva Guardada")
-        return True
+        return nuevaReserva.id
 
     except Exception as e: 
         db.rollback()
         print("Error al insertar la reserva")
-        return False
+        return None

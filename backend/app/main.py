@@ -267,12 +267,14 @@ class ReservaSchema(BaseModel):
 
 @app.post("/reservar")
 def enviar_reserva(reserva: ReservaSchema, db: Session = Depends(get_db)):
-    exito = registraReserva(
+    reserva_id = registraReserva(
         db=db, 
         deporte=reserva.deporte, 
         fecha=reserva.fecha, 
-        hora=reserva.hora, 
+        hora=reserva.hora,
         usuario_id=reserva.usuario_id
     )
-    
-    return {"status": "ok", "mensaje": "Reserva enviada a la lógica"}
+    if reserva_id is None:
+        raise HTTPException(status_code=500, detail="No se pudo guardar la reserva")
+
+    return {"status": "ok", "reserva_id": reserva_id, "mensaje": "Reserva guardada"}
