@@ -26,15 +26,11 @@ class Usuario(Base):
 
 
 class Reserva(Base):
-    """
-    Tabla 'reservas' — guarda las reservas de cada usuario.
-    """
     __tablename__ = "reservas"
 
-    id          = Column(Integer, primary_key=True, index=True)
-    id_usuario  = Column(Integer, nullable=False)
-    deporte     = Column(String, nullable=False)
-    fecha       = Column(String, nullable=False)
-    hora_inicio = Column(String, nullable=False)
-    hora_fin    = Column(String, nullable=False)
-    estado      = Column(String, default="activa")
+    id = Column(Integer, primary_key=True, index=True)
+    deporte = Column(String, nullable=False)
+    fecha = Column(String, nullable=False)
+    hora = Column(String, nullable=False)
+    usuario_id = Column(Integer, nullable=False, default=0)
+ 
